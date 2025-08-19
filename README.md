@@ -1,9 +1,11 @@
 # USD/TRY Döviz Kuru Tahmini Projesi
 
 Bu proje, **Amerikan Doları / Türk Lirası (USD/TRY)** döviz kuru tahmini yapmak için **LSTM (derin öğrenme)** ve **XGBoost (Makine öğrenmesi)** modellerini karşılaştırır.
+
 --
 ## Amaç
 Geçmiş 30 günlük döviz kuru verilerini kullanarak, bir sonraki günün kapanış kurunu tahmin etmek ve hangi modelin daha iyi perfrmans gösterdiğini analiz etmek.
+
 --
 ## Veri Kaynağı
 -**Sembol**: 'USDTRY=X'
@@ -11,6 +13,14 @@ Geçmiş 30 günlük döviz kuru verilerini kullanarak, bir sonraki günün kapa
 -**Zaman Aralığı**: 2018-01-01 ile 2024-06-01
 -**Frekans**: Günlük
 -**Sütun**: 'Close' (Kapanış kuru)
+
+---
+## 🧠 Modeller
+
+| Model  | Açıklama |
+|-------|--------|
+| **LSTM** | Zaman serilerinde uzun vadeli bağımlılıkları yakalayan bir RNN türü. |
+| **XGBoost** | Gradient boosting temelli güçlü bir regresyon modeli. |
 
 --
 ## Teknik Detaylar
