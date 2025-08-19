@@ -1,103 +1,97 @@
-# 💱 USD/TRY Döviz Kuru Tahmini Projesi
+# 💱 USD/TRY Exchange Rate Forecasting Project
 
-Bu proje, **Amerikan Doları / Türk Lirası (USD/TRY)** döviz kuru tahmini yapmak için **LSTM (Derin Öğrenme)** ve **XGBoost (Makine Öğrenmesi)** modellerini karşılaştırır. Amacımız, geçmiş döviz kuru verilerini kullanarak gelecekteki değerleri tahmin etmek ve modellerin performansını değerlendirmektir.
-
----
-
-## 🎯 Amaç
-Geçmiş 30 günlük döviz kuru verilerini kullanarak, bir sonraki günün kapanış kurunu tahmin etmek ve hangi modelin daha iyi performans gösterdiğini analiz etmek.
+This project compares **LSTM (Deep Learning)** and **XGBoost (Machine Learning)** models to forecast the **US Dollar / Turkish Lira (USD/TRY)** exchange rate. Our goal is to predict future exchange rates using historical data and evaluate the performance of both models.
 
 ---
 
-## 📊 Veri Kaynağı
-- **Sembol**: `USDTRY=X`
-- **Kaynak**: Yahoo Finance (`yfinance`)
-- **Zaman Aralığı**: 2018-01-01 ile 2024-06-01
-- **Frekans**: Günlük
-- **Sütun**: `Close` (Kapanış Kuru)
+## 🎯 Objective
+Using the past 30 days of exchange rate data, predict the next day’s closing rate and analyze which model performs better.
 
 ---
 
-## 🧠 Kullanılan Modeller
-| Model      | Açıklama |
-|-----------|--------|
-| **LSTM**  | Zaman serilerinde uzun vadeli bağımlılıkları yakalayabilen derin öğrenme modeli. Zaman sırasını anlar, bu yüzden bu tür projelerde güçlüdür. |
-| **XGBoost** | Gradient boosting temelli karar ağaçları kullanır. Yapısal verilerde güçlüdür ama ham zaman serisinde sınırlıdır. |
+## 📊 Data Source
+- **Symbol**: `USDTRY=X`
+- **Source**: Yahoo Finance (`yfinance`)
+- **Time Period**: January 1, 2018 – June 1, 2024
+- **Frequency**: Daily
+- **Column Used**: `Close` (Closing Rate)
 
 ---
 
-## 🔧 Teknik Detaylar
-- **Zaman penceresi (seq_length)**: 30 gün
-- **Eğitim/Test oranı**: %80 / %20
-- **Veri Normalizasyonu**: `MinMaxScaler` (0-1 arası)
-- **Hata Metrikleri**: MAE (Ortalama Mutlak Hata), RMSE (Kök Ortalama Kare Hata)
-- **Kütüphaneler**: `yfinance`, `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `tensorflow`, `xgboost`
+## 🧠 Models Used
+| Model      | Description |
+|-----------|-------------|
+| **LSTM**  | A deep learning model capable of capturing long-term dependencies in time series. It understands sequential patterns, making it strong for forecasting tasks. |
+| **XGBoost** | A gradient-boosted decision tree algorithm. Powerful for structured data but limited when applied directly to raw time series without feature engineering. |
 
 ---
 
-## 📈 Zaman Serisi Görselleştirme
-
-Aşağıdaki grafik, 2018–2024 yılları arasında USD/TRY döviz kuru değişimini göstermektedir. Döviz kuru, özellikle 2020 sonrası büyük dalgalanmalar yaşamıştır.
-
-![USD/TRY Zaman Serisi](2018_2024_yillari_arasinda_usdtry_doviz_kuru_degisimi.png)
-
-> 📌 **Grafik Açıklaması**: 2018'de yaklaşık 3.8 seviyesinde olan döviz kuru, 2023 yılında 28 seviyesine kadar çıkmıştır. Bu yüksek volatilite, tahmin modelleri için büyük bir zorluktur.
+## 🔧 Technical Details
+- **Sequence Length (seq_length)**: 30 days
+- **Train/Test Split**: 80% / 20%
+- **Data Normalization**: `MinMaxScaler` (scaled to 0–1 range)
+- **Evaluation Metrics**: MAE (Mean Absolute Error), RMSE (Root Mean Squared Error)
+- **Libraries Used**: `yfinance`, `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `tensorflow`, `xgboost`
 
 ---
 
-## 📊 Model Karşılaştırma Sonuçları
+## 📈 Time Series Visualization
 
-Aşağıdaki grafik, LSTM ve XGBoost modellerinin test setindeki performansını gerçek veriyle karşılaştırmaktadır.
+The graph below shows the USD/TRY exchange rate fluctuations between 2018 and 2024. The currency experienced significant volatility, especially after 2020.
 
-![Model Karşılaştırma](usdtry_doviz_kuru_tahmini_karsilastirmasi_LSTMvsXGBoost.png)
+![USD/TRY Time Series](2018_2024_yillari_arasinda_usdtry_doviz_kuru_degisimi.png)
 
-> 📌 **Grafik Açıklaması**: 
-> - **Siyah çizgi**: Gerçek döviz kuru
-> - **Kırmızı çizgi (kesikli)**: LSTM tahmini
-> - **Mavi çizgi (noktalı)**: XGBoost tahmini
+> 📌 **Graph Description**:  
+> The exchange rate was around 3.8 in 2018 and surged up to nearly 28 by 2023. This high volatility presents a major challenge for forecasting models.
+
+---
+
+## 📊 Model Comparison Results
+
+The graph below compares the predictions of the LSTM and XGBoost models against actual values on the test set.
+
+![Model Comparison](usdtry_doviz_kuru_tahmini_karsilastirmasi_LSTMvsXGBoost.png)
+
+> 📌 **Graph Description**:  
+> - **Black line**: Actual exchange rate  
+> - **Red dashed line**: LSTM prediction  
+> - **Blue dotted line**: XGBoost prediction  
 > 
-> LSTM, genel trendi daha iyi takip ederken, XGBoost ani hareketlere yeterince uyum sağlayamamıştır.
+> LSTM better follows the overall trend, while XGBoost struggles to adapt to sudden market movements.
 
 ---
 
-## 📊 Hata Analizi (Performans Metrikleri)
+## 📊 Error Analysis (Performance Metrics)
 
-| Model      | MAE (Ortalama Mutlak Hata) | RMSE (Kök Ortalama Kare Hata) |
+| Model      | MAE (Mean Absolute Error) | RMSE (Root Mean Squared Error) |
 |-----------|----------------------------|-------------------------------|
 | **LSTM**  | 0.87                       | 1.03                          |
 | **XGBoost** | 8.11                     | 9.28                          |
 
-### 🔍 Yorum:
-- **LSTM**, hem MAE hem de RMSE açısından **çok daha iyi performans** sergilemiştir.
-- XGBoost’un yüksek hatası, **zaman bağımlılığı olmayan** ham veriyle çalışmasından kaynaklanmaktadır.
-- LSTM, zaman serisi yapısını anladığı için uzun vadeli eğilimleri daha iyi yakalıyor.
+### 🔍 Interpretation:
+- **LSTM** achieves **significantly better performance** in both MAE and RMSE.
+- The high error in XGBoost stems from its inability to inherently understand temporal dependencies when trained on raw sequential data.
+- LSTM, designed for sequences, captures long-term trends more effectively.
 
 ---
 
-## 🏆 Sonuç: Hangi Model Daha İyi?
+## 🏆 Conclusion: Which Model is Better?
 
-✅ **LSTM**, bu proje için **daha başarılı model** olmuştur.
+✅ **LSTM** is the **superior model** for this forecasting task.
 
-> 🔎 **Neden?**  
-> Zaman serisi tahmini, geçmişteki sıralı bağımlılıkları anlamak ister. LSTM bu bağımlılıkları iç yapısında tutabilirken, XGBoost bu bilgiyi otomatik olarak **kavrayamaz**. Bu yüzden, ham zaman serisinde LSTM genellikle XGBoost’a göre daha iyi sonuç verir.
-
----
-
-## 🚫 Uyarı: Bu bir yatırım tavsiyesi değildir
-
-> ⚠️ Bu proje **tamamen eğitim amaçlıdır**.  
-> Finansal piyasalar, siyasi gelişmeler, enflasyon, faiz oranları gibi çok sayıda etkene maruzdur. Bu model sadece geçmiş veriyi analiz eder. Gerçek dünyada yatırım kararı verirken **hiçbir zaman sadece bu tür modellere güvenilmemelidir**.
+> 🔎 **Why?**  
+> Time series forecasting requires understanding of ordered, sequential dependencies. LSTM can store and utilize these patterns internally, while XGBoost treats each input window as an independent vector without explicit time awareness. Therefore, on raw time series data, LSTM typically outperforms XGBoost.
 
 ---
 
-## ▶️ Nasıl Çalıştırılır?
+## 🚫 Disclaimer: Not Financial Advice
 
-1. [Google Colab](https://colab.research.google.com)’e git.
-2. Yeni bir notebook oluştur.
-3. Kodu yapıştır ve "Tümünü Çalıştır" butonuna tıkla.
-4. Sonuç grafikleri otomatik olarak gösterilecek.
-5. Grafikleri kaydet ve bu `graphs/` klasörüne ekle.
+> ⚠️ This project is **purely educational**.  
+> Financial markets are influenced by political events, inflation, interest rates, and global developments. This model only analyzes historical prices. **Never rely solely on such models for real-world investment decisions.**
 
 ---
 
-## 📁 Proje Yapısı
+
+---
+
+## 📁 Project Structure
