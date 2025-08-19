@@ -72,7 +72,7 @@ y_train, y_test = y[:split], y[split:]
 X_train_lstm = X_train.reshape((X_train.shape[0], X_train.shape[1], 1))
 X_test_lstm = X_test.reshape((X_test.shape[0], X_test.shape[1], 1))
 
-# XGBoost için 2D yeterli
+# XGBoost için (2D)
 X_train_xgb = X_train
 X_test_xgb = X_test
 
